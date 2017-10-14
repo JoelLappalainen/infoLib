@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>InfoLib</title>
@@ -9,13 +10,16 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
 
 </head>
+
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -27,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">InfoLib</a>
+                <a id="brand">InfoLib</a>
             </div>
 
             <!-- Items -->
@@ -50,39 +54,40 @@
             </div>
         </div>
     </nav>
-<div class="sisalto">
+    <div class="sisalto">
 
-  <!-- content -->
+        <!-- content -->
 
-  <article id="team">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-3">
-                <h3>LATEST ACTIVITY</h3>
-              </div>
-              <div class="col-sm-9">
-                <h3>ALL BOOKS</h3>
+        <article id="team">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h3>LATEST ACTIVITY</h3>
+                    </div>
+                    <div class="col-sm-9">
+                        <h3>ALL BOOKS</h3>
 
-                <div id="search_container">
-                    <form role="search" method="get" action="/games/search/">
-                        <div class="input-group search-input-group">
-                            <input type="text" class="form-control" id="searchBox" class="form-control" name="q" value="" placeholder="Search" >
-                            <span class="input-group-addon">
+                        <div id="search_container">
+                            <form role="search" method="get" action="/games/search/">
+                                <div class="input-group search-input-group">
+                                    <input type="text" class="form-control" id="searchBox" class="form-control" name="q" value="" placeholder="Search">
+                                    <span class="input-group-addon">
                                 <button type="submit">
                                     <span class="glyphicon glyphicon-search" value="search"></span>
-                                </button>
-                            </span>
+                                    </button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+
+                    </div>
                 </div>
+            </div>
+        </article>
 
-              </div>
-          </div>
-      </div>
-  </article>
+        <!-- content -->
 
-  <!-- content -->
-
-</div>
+    </div>
 </body>
+
 </html>
