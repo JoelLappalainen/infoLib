@@ -80,6 +80,36 @@
                             </form>
                         </div>
 
+
+                        {% if all_books %}
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Publication Year</th>
+                                        <th>Publisher</th>
+                                        <th>Page count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  {% for book in all_books %}
+                                      <tr>
+                                          <td>{{ book.book_name }}</td>
+                                          <td>{{ book.book_author }}</td>
+                                          <td>{{ book.publication_year }}</td>
+                                          <td>{{ book.publisher }}</td>
+                                          <td><small>{{ book.page_count }}</small></td>
+                                      </tr>
+                                  {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
