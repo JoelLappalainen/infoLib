@@ -27,18 +27,13 @@ h3 {
 
 #brand {
     font-family: 'Cookie', cursive;
-    font-size: 40px;
-    color: #D3643B;
+    font-size: 60px;
+    color: white;
     text-decoration: none;
-}
-
-#recent_activity tr {
-    color: #D3643B
 }
 
 #brand:hover {
     color: white;
-    cursor: pointer;
 }
 
 article {

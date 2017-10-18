@@ -11,4 +11,4 @@ class Book(models.Model):
     page_count = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return self.name
+        return self.book_name

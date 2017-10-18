@@ -61,9 +61,6 @@
         <article id="team">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <h3>LATEST ACTIVITY</h3>
-                    </div>
                     <div class="col-sm-9">
                         <h3>ALL BOOKS</h3>
 
@@ -95,21 +92,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  {% for book in all_books %}
-                                      <tr>
-                                          <td>{{ book.book_name }}</td>
-                                          <td>{{ book.book_author }}</td>
-                                          <td>{{ book.publication_year }}</td>
-                                          <td>{{ book.publisher }}</td>
-                                          <td><small>{{ book.page_count }}</small></td>
-                                      </tr>
-                                  {% endfor %}
+                                    {% for book in all_books %}
+                                    <tr>
+                                        <td>{{ book.book_name }}</td>
+                                        <td>{{ book.book_author }}</td>
+                                        <td>{{ book.publication_year }}</td>
+                                        <td>{{ book.publisher }}</td>
+                                        <td><small>{{ book.page_count }}</small></td>
+                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
 
                         {% endif %}
 
+                    </div>
+                    <div class="col-sm-3">
+                        <h3>LATEST ACTIVITY</h3>
+                        <table>
+                            <tbody id="recent_activity">
+                                <tr>
+                                    <font color="#D3643B">Liisa borrowed: The Hunger Games (The Hunger Games #1)</font>
+                                </tr>
+                                <br><br>
+                                <tr>
+                                    <font color="#D3643B">Joel returned: The Bible</font>
+                                </tr>
+                                <br><br>
+                                <tr>
+                                    <font color="#D3643B">Admin added: Harry Potter and the Order of the Phoenix</font>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
