@@ -1,7 +1,6 @@
 from django.db import models
 
 class Book(models.Model):
-    book_id = models.IntegerField(default=0)
     ISBN = models.CharField(max_length=150)
     book_name = models.CharField(max_length=150)
     description = models.CharField(max_length=500)
