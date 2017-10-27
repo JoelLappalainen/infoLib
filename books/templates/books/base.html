@@ -1,4 +1,4 @@
-{% load staticfiles %}
+<!-- {% load staticfiles %} -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +39,9 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li class="navbar-text"><small>Signed in as</small></li>
+                    <li class="navbar-text">
+                        <small>Signed in as</small>
+                    </li>
                     <li>
                         <a href="">
                             Profile
@@ -56,8 +58,7 @@
     </nav>
     <div class="sisalto">
 
-			{% block content %}
-			{% endblock %}
+        {% block content %} {% endblock %}
 
     </div>
 </body>
