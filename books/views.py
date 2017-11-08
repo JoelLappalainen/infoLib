@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from books.models import Book
+from books.models import Book, Borrowing
 from books.forms import BookForm
 from django.core.urlresolvers import reverse
 from django.utils.formats import get_format
+from datetime import datetime
+from django.utils.dateformat import DateFormat
 
 def index(request):
     all_books = Book.objects.all()
@@ -37,3 +39,20 @@ def detail(request, book_id):
     except Book.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'books/detail.html', {'book': book})
+
+def borrow(request, book_id):
+    detailurl = request.build_absolute_uri(reverse('books:detail', args=[book_id]))
+    book = Book.objects.get(pk=book_id)
+    book.borrowed = True
+    book.save()
+    date = DateFormat(datetime.now()).format(get_format('DATE_FORMAT'))
+    new_borrowing = Borrowing(borrowing_date=date, book=book)
+    new_borrowing.save()
+    return render(request, 'books/detail.html', {'detailurl': detailurl, 'book': book})
+
+def return_book(request, book_id):
+    detailurl = request.build_absolute_uri(reverse('books:detail', args=[book_id]))
+    book = Book.objects.get(pk=book_id)
+    book.borrowed = False
+    book.save()
+    return render(request, 'books/detail.html', {'detailurl': detailurl, 'book': book})

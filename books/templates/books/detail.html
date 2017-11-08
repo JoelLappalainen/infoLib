@@ -10,6 +10,12 @@
           {% else %}
             <h3>No image to display</h3>
           {% endif %}
+					<br>
+					{% if book.borrowed %}
+							<a href="{% url 'books:return' book.id %}" class="btn btn-danger btn-sm" role="button">Return</a><br><br>
+					{% else %}
+							<a href="{% url 'books:borrow' book.id %}" class="btn btn-default btn-sm" role="button">Borrow</a><br><br>
+					{% endif %}
 				</div>
 	    </div>
 	    <div class="col-sm-8 col-md-9">
