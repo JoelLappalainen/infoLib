@@ -12,13 +12,13 @@
 				<input class="form-control" name="ISBN" type="text" placeholder="ISBN" required /><br>
 
 				<label for="id_book_name" class="sr-only">Book name</label>
-				<input class="form-control" name="book_name" type="text" placeholder="Book name" required /><br>
+				<input class="form-control" name="name" type="text" placeholder="Book name" required /><br>
 
 				<label for="id_description" class="sr-only">Description</label>
 				<textarea id="description-box" rows="4" class="form-control" name="description" type="text" placeholder="Description"></textarea><br>
 
 				<label for="id_book_author" class="sr-only">Author</label>
-				<input class="form-control" name="book_author" type="text" placeholder="Author" /><br>
+				<input class="form-control" name="author" type="text" placeholder="Author" /><br>
 
 				<!-- todo: add pattern -->
 				<label for="id_publication_year" class="sr-only">Publication year:</label>
@@ -30,6 +30,9 @@
 				<!-- todo: add pattern -->
 				<label for="id_page_count" class="sr-only">Page count:</label>
 				<input class="form-control" name="page_count" type="number" min="0" max="9999" step="1" placeholder="Page count" required /><br>
+
+				<label for="id_cover_URL" class="sr-only">Cover URL</label>
+				<input class="form-control" name="cover_URL" type="text" placeholder="Cover URL" /><br>
 
 				<input class="btn btn-lg btn-primary btn-block" id="form-button" type="submit" value="Submit"/>
 

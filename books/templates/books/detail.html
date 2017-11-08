@@ -4,11 +4,17 @@
 	<div class="container">
 		<div class="row">
 	    <div class="col-sm-4 col-md-3">
-				<p class="book-info">[Book cover here]</p>
+				<div class="book-info">
+          {% if book.cover_URL %}
+            <img id="book-img" src="{{ book.cover_URL }}" class="img-responsive">
+          {% else %}
+            <h3>No image to display</h3>
+          {% endif %}
+				</div>
 	    </div>
 	    <div class="col-sm-8 col-md-9">
-				<h5>{{ book.book_author }}; {{ book.publication_year }}</h5>
-	      <h3 class="book-title">{{ book.book_name }}</h3>
+				<h5>{{ book.author }}; {{ book.publication_year }}</h5>
+	      <h3 class="book-title">{{ book.name }}</h3>
 				<h6>
 					<strong>Publisher:</strong> {{ book.publisher }}<br>
 					<strong>Page count:</strong> {{ book.page_count }}<br><br>

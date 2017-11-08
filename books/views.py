@@ -16,15 +16,15 @@ def add_book(request):
         book_form = BookForm(request.POST)
         print (book_form.errors)
         if book_form.is_valid():
-            print ("valid")
             book_ISBN = book_form.cleaned_data['ISBN']
-            book_name = book_form.cleaned_data['book_name']
+            book_name = book_form.cleaned_data['name']
             book_description = book_form.cleaned_data['description']
-            book_author = book_form.cleaned_data['book_author']
+            book_author = book_form.cleaned_data['author']
             book_publication_year = book_form.cleaned_data['publication_year']
             book_publisher = book_form.cleaned_data['publisher']
             book_page_count = book_form.cleaned_data['page_count']
-            new_book = Book(ISBN=book_ISBN, book_name=book_name, description=book_description, book_author=book_author, publication_year=book_publication_year, publisher=book_publisher, page_count=book_page_count)
+            book_cover_URL = book_form.cleaned_data['cover_URL']
+            new_book = Book(ISBN=book_ISBN, name=book_name, description=book_description, author=book_author, publication_year=book_publication_year, publisher=book_publisher, page_count=book_page_count, cover_URL=book_cover_URL)
             new_book.save()
             return HttpResponseRedirect('/')
     else:
