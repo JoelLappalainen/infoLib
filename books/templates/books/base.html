@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a id="brand">InfoLib</a>
+                <a id="brand" href="/">InfoLib</a>
             </div>
 
             <!-- Items -->
@@ -41,6 +41,11 @@
 
                     <li class="navbar-text">
                         <small>Signed in as</small>
+                    </li>
+                    <li>
+                        <a href="{% url 'books:add_book' %}">
+                            Add book
+                        </a>
                     </li>
                     <li>
                         <a href="">
@@ -58,7 +63,8 @@
     </nav>
     <div class="sisalto">
 
-        <!-- {% block content %} {% endblock %} -->
+      {% block content %}
+      {% endblock %}
 
     </div>
 </body>
