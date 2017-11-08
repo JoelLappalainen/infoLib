@@ -30,3 +30,10 @@ def add_book(request):
     else:
         book_form = BookForm()
     return render(request, 'books/add_book.html', {'booksurl': booksurl, 'book_form': book_form})
+
+def detail(request, book_id):
+    try:
+        book = Book.objects.get(pk=book_id)
+    except Book.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'books/detail.html', {'book': book})

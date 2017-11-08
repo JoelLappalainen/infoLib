@@ -37,13 +37,13 @@
                         </thead>
                         <tbody>
                             {% for book in all_books %}
-                            <tr>
-                                <td>{{ book.book_name }}</td>
-                                <td>{{ book.book_author }}</td>
-                                <td>{{ book.publication_year }}</td>
-                                <td>{{ book.publisher }}</td>
-                                <td><small>{{ book.page_count }}</small></td>
-                            </tr>
+                                <tr>
+                                    <td><a href="{% url 'books:detail' book.id %}">{{ book.book_name }}</a></td>
+                                    <td>{{ book.book_author }}</td>
+                                    <td>{{ book.publication_year }}</td>
+                                    <td>{{ book.publisher }}</td>
+                                    <td><small>{{ book.page_count }}</small></td>
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>

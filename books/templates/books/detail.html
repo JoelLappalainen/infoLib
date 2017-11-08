@@ -1,0 +1,21 @@
+{% extends "books/base.html" %}
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+	    <div class="col-sm-4 col-md-3">
+				<p class="book-info">[Book cover here]</p>
+	    </div>
+	    <div class="col-sm-8 col-md-9">
+				<h5>{{ book.book_author }}; {{ book.publication_year }}</h5>
+	      <h3 class="book-title">{{ book.book_name }}</h3>
+				<h6>
+					<strong>Publisher:</strong> {{ book.publisher }}<br>
+					<strong>Page count:</strong> {{ book.page_count }}<br><br>
+				</h6>
+				<p>{{ book.description }}</p>
+	  	</div>
+		</div>
+	</div>
+
+{% endblock %}

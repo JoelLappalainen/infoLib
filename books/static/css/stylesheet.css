@@ -84,3 +84,27 @@ h3 {
   width: 50%;
   margin: auto;
 }
+
+.col-sm-9 {
+  padding-bottom: 50px;
+}
+
+.book-title {
+  text-align: left;
+  text-transform: uppercase;
+  color: #D3643B;
+  padding-bottom: 5px;
+}
+
+.book-info {
+  text-align: center;
+}
+
+h5 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+h6 {
+  margin-top: 0;
+}
