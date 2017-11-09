@@ -116,6 +116,12 @@ h3 {
   color: #D3643B;
 }
 
+h4 {
+  color: #7C7D7E;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 h5 {
   font-size: 1.2em;
   font-weight: bold;

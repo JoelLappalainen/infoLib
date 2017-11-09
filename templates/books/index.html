@@ -30,16 +30,33 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Author</th>
-                                <th>Publication Year</th>
+                                <th>Borrow</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for book in all_books %}
                                 <tr>
-                                    <td><a href="{% url 'books:detail' book.id %}">{{ book.name }}</a></td>
-                                    <td>{{ book.author }}</td>
-                                    <td>{{ book.publication_year }}</td>
+                                    <td>
+                                      {{ book.author }}, {{ book.publication_year }}<br>
+                                      <a href="{% url 'books:detail' book.id %}"><h4>{{ book.name }}</h4></a>
+                                    </td>
+                                    {% if book.status == 'o' %}
+                                        {% if book.borrower == user %}
+                                            <td>
+                                              <a href="{% url 'books:return' book.id %}?next={{request.path}}" class="btn btn-danger btn-sm" role="button">Return</a><br><br>
+                                            </td>
+                                        {% else %}
+                                            <td>
+                                                <p>Borrowed by {{ book.borrower }}</p><br>
+                                            </td>
+                                        {% endif %}
+                                    {% elif book.status == 'a' %}
+                                        <td>
+                                            <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" role="button">Borrow</a><br><br>
+                                        </td>
+                                    {% else %}
+                                      <td>Not for loan</td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>

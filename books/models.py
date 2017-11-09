@@ -26,6 +26,9 @@ class Book(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ["name"]
+
 class Borrowing(models.Model):
     borrowing_date = models.DateTimeField(auto_now_add=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)

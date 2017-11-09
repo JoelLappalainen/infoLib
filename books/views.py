@@ -66,7 +66,7 @@ def borrow(request, book_id, user_id):
     new_borrowing = Borrowing(borrowing_date=date, book=book, borrower=user)
     new_borrowing.save()
     # return render(request, 'books/detail.html', {'detailurl': detailurl, 'book': book})
-    return HttpResponseRedirect(detailurl)
+    return HttpResponseRedirect('/')
 
 @login_required
 def return_book(request, book_id):
@@ -77,17 +77,19 @@ def return_book(request, book_id):
     book.status = 'a'
     book.save()
     # return render(request, 'books/detail.html', {'detailurl': detailurl, 'book': book})
-    return HttpResponseRedirect(detailurl)
+    return HttpResponseRedirect('/')
 
 def register(request):
+    registered = False
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
+            registered = True
         else:
             print (user_form.errors)
     else:
         user_form = UserForm()
-    return render(request, 'register.html', {'user_form': user_form})
+    return render(request, 'register.html', {'user_form': user_form, 'registered': registered})
