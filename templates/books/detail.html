@@ -14,11 +14,12 @@
 							<br>
 							{% if book.borrowed %}
 									<a href="{% url 'books:return' book.id %}" class="btn btn-danger btn-sm" role="button">Return</a><br><br>
-									<p>Borrower: {{ book.borrower }}</p>
 							{% else %}
 									<a href="{% url 'books:borrow' book.id user.id %}" class="btn btn-default btn-sm" role="button">Borrow</a><br><br>
 							{% endif %}
 					{% endif %}
+					<a href="{% url 'books:reviews' book.id user.id %}" class="btn btn-success btn-sm" role="button">Review this book</a><br><br>
+
 
 				</div>
 	    </div>
@@ -31,6 +32,44 @@
 				</h6>
 				<p>{{ book.description }}</p>
 	  	</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 col-md-3">
+					<h3>Sivupalkki</h3>
+			</div>
+					<div class="col-sm-8 col-md-9">
+					<h3>Reviews</h3>
+					{% if all_reviews %}
+							{% for review in all_reviews %}
+
+									{% if forloop.first %}
+											<div class="row">
+									{% endif %}
+
+											<div class="col-xs-12 col-sm-6 col-lg-4" id="review">
+													{{ review.rating }}/5
+													<p>{{ review.review }}</p>
+													<p id="reviewer"><small>- {{ review.reviewer }}</small></p>
+											</div>
+
+									{% if forloop.counter|divisibleby:3 %}
+											</div><br>
+											<div class="row">
+									{% endif %}
+
+									{% if forloop.last %}
+											</div>
+									{% endif %}
+
+							{% endfor %}
+					{% else %}
+							<p>Not any reviews!</p>
+					{% endif %}
+
+
+
+</div>
+				</div>
 		</div>
 	</div>
 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Book(models.Model):
     ISBN = models.CharField(max_length=150)
@@ -34,3 +35,10 @@ class Borrowing(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     returning_date = models.DateTimeField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+class Review(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    review = models.CharField(max_length=1000)
+    rating = models.IntegerField(default=1)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
+    reviewed_book = models.ForeignKey(Book, on_delete=models.CASCADE)

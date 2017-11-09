@@ -76,6 +76,11 @@ h3 {
   margin: auto;
 }
 
+.form-review {
+  width: 90%;
+  margin: auto;
+}
+
 #description-box {
   resize:none;
 }
@@ -135,4 +140,9 @@ h6 {
   margin: auto;
   width: 180px;
   border: 1px solid #A4A4A4;
+}
+
+#reviewer {
+  font-weight: bold;
+  color: #D3643B;
 }

@@ -1,5 +1,5 @@
 from django import forms
-from books.models import Book
+from books.models import Book, Review
 from django.contrib.auth.models import User
 
 
@@ -25,3 +25,12 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+
+class ReviewForm(forms.ModelForm):
+    review = forms.CharField(max_length=1000)
+    rating = forms.IntegerField(min_value=1, max_value=5)
+
+    class Meta:
+        model = Review
+        fields = ('review', 'rating')
