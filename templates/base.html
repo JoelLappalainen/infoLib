@@ -39,8 +39,12 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
+                {% if user.is_authenticated %}
+
                     <li class="navbar-text">
-                        <small>Signed in as</small>
+                        <small>Signed in as
+                          <span class="username">{{ user.get_username }}</span>
+                        </small>
                     </li>
                     <li>
                         <a href="{% url 'books:add_book' %}">
@@ -48,15 +52,31 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{% url 'books:profile' user.id %}">
                             Profile
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{% url 'logout'%}">
                             Logout
                         </a>
                     </li>
+
+                {% else %}
+
+                    <li>
+                        <a href="{% url 'login'%}?next={{request.path}}">
+                            Login
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'books:register' %}">
+                            Register
+                        </a>
+                    </li>
+
+                {% endif %}
+
                 </ul>
             </div>
         </div>

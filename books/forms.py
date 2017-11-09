@@ -1,5 +1,6 @@
 from django import forms
 from books.models import Book
+from django.contrib.auth.models import User
 
 
 class BookForm(forms.ModelForm):
@@ -12,7 +13,15 @@ class BookForm(forms.ModelForm):
     page_count = forms.IntegerField(min_value=0, max_value=9999)
     cover_URL = forms.URLField(max_length=200)
 
-
     class Meta:
         model = Book
         fields = ('ISBN', 'name', 'description', 'author', 'publication_year', 'publisher', 'page_count', 'cover_URL',)
+
+
+class UserForm(forms.ModelForm):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')

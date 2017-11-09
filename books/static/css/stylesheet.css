@@ -100,6 +100,22 @@ h3 {
   text-align: center;
 }
 
+.profile-sidebar {
+  text-transform: uppercase;
+  color: #D3643B;
+  padding-bottom: 5px;
+}
+
+.profile-title {
+  text-align: left;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+}
+
+.username {
+  color: #D3643B;
+}
+
 h5 {
   font-size: 1.2em;
   font-weight: bold;

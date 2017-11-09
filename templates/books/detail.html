@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+	    <div class="col-sm-4 col-md-3">
+				<div class="book-info">
+					{% if user.is_authenticated %}
+		          {% if book.cover_URL %}
+		            <img id="book-img" src="{{ book.cover_URL }}" class="img-responsive">
+		          {% else %}
+		            <h3>No image to display</h3>
+		          {% endif %}
+							<br>
+							{% if book.borrowed %}
+									<a href="{% url 'books:return' book.id %}" class="btn btn-danger btn-sm" role="button">Return</a><br><br>
+									<p>Borrower: {{ book.borrower }}</p>
+							{% else %}
+									<a href="{% url 'books:borrow' book.id user.id %}" class="btn btn-default btn-sm" role="button">Borrow</a><br><br>
+							{% endif %}
+					{% endif %}
+
+				</div>
+	    </div>
+	    <div class="col-sm-8 col-md-9">
+				<h5>{{ book.author }}; {{ book.publication_year }}</h5>
+	      <h3 class="book-title">{{ book.name }}</h3>
+				<h6>
+					<strong>Publisher:</strong> {{ book.publisher }}<br>
+					<strong>Page count:</strong> {{ book.page_count }}<br><br>
+				</h6>
+				<p>{{ book.description }}</p>
+	  	</div>
+		</div>
+	</div>
+
+{% endblock %}
