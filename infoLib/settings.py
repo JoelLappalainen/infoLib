@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'infoLib.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'infolib_database',
+        'NAME': 'django_deploy',
         'USER': 'infolib1',
         'PASSWORD': '',
         'HOST': 'localhost',
