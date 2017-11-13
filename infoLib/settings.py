@@ -25,7 +25,7 @@ SECRET_KEY = '=0=qkr1x6(apr7whi5@z2t41m8d$is#$^i2rawbb8xgufpg(j8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['protected-reaches-89687.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['immense-tor-48881.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -121,8 +121,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-DISABLE_COLLECTSTATIC = 1
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
