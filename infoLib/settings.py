@@ -55,7 +55,7 @@ ROOT_URLCONF = 'infoLib.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['./templates',],
+        'DIRS': ['./templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,6 +121,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+DISABLE_COLLECTSTATIC = 1
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
