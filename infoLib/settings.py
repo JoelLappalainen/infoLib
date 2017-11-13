@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '=0=qkr1x6(apr7whi5@z2t41m8d$is#$^i2rawbb8xgufpg(j8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['immense-tor-48881.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -85,10 +86,13 @@ DATABASES = {
     }
 }
 
+DATABASE_URL = 'postgres://bbqmfobmaebcgy:f25dd87190929ca016c2e8d15be1675e313de0d90a7aec34762f1cb07b7d1fc5@ec2-23-23-237-68.compute-1.amazonaws.com:5432/d8p1nlobaltg1o'
+
 # Update database configuration with $DATABASE_URL.
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
