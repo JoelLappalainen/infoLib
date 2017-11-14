@@ -149,6 +149,6 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 # try to load local_settings.py if it exists
 try:
-    from infoLib.local_settings import *
+    from local_settings import *
 except Exception as e:
     pass
