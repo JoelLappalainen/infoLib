@@ -133,6 +133,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = '=0=qkr1x6(apr7whi5@z2t41m8d$is#$^i2rawbb8xgufpg(j8'
+
 # try to load local_settings.py if it exists
 try:
     from infoLib.local_settings import *
