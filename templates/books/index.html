@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <!-- content -->
 
@@ -35,29 +34,35 @@
                         </thead>
                         <tbody>
                             {% for book in all_books %}
-                                <tr>
-                                    <td>
-                                      {{ book.author }}, {{ book.publication_year }}<br>
-                                      <a href="{% url 'books:detail' book.id %}"><h4>{{ book.name }}</h4></a>
-                                    </td>
-                                    {% if book.status == 'o' %}
-                                        {% if book.borrower == user %}
-                                            <td>
-                                              <a href="{% url 'books:return' book.id %}?next={{request.path}}" class="btn btn-danger btn-sm" role="button">Return</a><br><br>
-                                            </td>
-                                        {% else %}
-                                            <td>
-                                                <p>Borrowed by {{ book.borrower }}</p><br>
-                                            </td>
-                                        {% endif %}
-                                    {% elif book.status == 'a' %}
-                                        <td>
-                                            <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" role="button">Borrow</a><br><br>
-                                        </td>
-                                    {% else %}
-                                      <td>Not for loan</td>
-                                    {% endif %}
-                                </tr>
+                            <tr>
+                                <td>
+                                    {{ book.author }}, {{ book.publication_year }}
+                                    <br>
+                                    <a href="{% url 'books:detail' book.id %}">
+                                        <h4>{{ book.name }}</h4>
+                                    </a>
+                                </td>
+                                {% if book.status == 'o' %} {% if book.borrower == user %}
+                                <td>
+                                    <a href="{% url 'books:return' book.id %}?next={{request.path}}" class="btn btn-danger btn-sm" role="button">Return</a>
+                                    <br>
+                                    <br>
+                                </td>
+                                {% else %}
+                                <td>
+                                    <p>Borrowed by {{ book.borrower }}</p>
+                                    <br>
+                                </td>
+                                {% endif %} {% elif book.status == 'a' %} {% if book.borrower == user %}
+                                <td>
+                                    <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" role="button">Borrow</a>
+                                    <br>
+                                    <br>
+                                </td>
+                                {% else %}
+                                <td>Not for loan</td>
+                                {% endif %}
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>
