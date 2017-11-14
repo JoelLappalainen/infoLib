@@ -53,13 +53,13 @@
                                     <p>Borrowed by {{ book.borrower }}</p>
                                     <br>
                                 </td>
-                                {% endif %} {% elif book.status == 'a' %} {% if book.borrower == user %}
+                                {% endif %} {% elif book.status == 'a' %}
                                 <td>
                                     <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" role="button">Borrow</a>
                                     <br>
                                     <br>
                                 </td>
-                                {% endif %} {% else %}
+                                {% else %}
                                 <td>Not for loan</td>
                                 {% endif %}
                             </tr>
