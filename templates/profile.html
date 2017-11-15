@@ -1,41 +1,38 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 col-md-3">
-					<div class="book-info">
-						<h3 class="profile-sidebar">{{ user }}</h3>
-					</div>
-				</div>
-				<div class="col-sm-8 col-md-9">
-					<h3 class="profile-title">Borrowed books:</h3>
-					{% if all_borrowings %}
-
-											<div class="table-responsive">
-													<table class="table table-striped">
-															<thead>
-																	<tr>
-																			<th>Name, author</th>
-																			<th>Date</th>
-																	</tr>
-															</thead>
-															<tbody>
-																	{% for borrowing in all_borrowings %}
-																			{% if borrowing.borrower == user %}
-																				<tr>
-																						<td>{{ borrowing.book.name }}</td>
-																						<td>{{ borrowing.borrowing_date }}</td>
-																				</tr>
-																			{% endif %}
-																	{% endfor %}
-															</tbody>
-													</table>
-											</div>
-
-					{% endif %}
-				</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-md-3">
+			<div class="book-info">
+				<h3 class="profile-sidebar">{{ user }}</h3>
 			</div>
 		</div>
+		<div class="col-sm-8 col-md-9">
+			<h3 class="profile-title">Borrowed books:</h3>
+			{% if all_borrowings %}
+
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name, author</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for borrowing in all_borrowings %} {% if borrowing.borrower == user %}
+						<tr>
+							<td>{{ borrowing.book.name }}</td>
+							<td>{{ borrowing.borrowing_date }}</td>
+						</tr>
+						{% endif %} {% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			{% endif %}
+		</div>
+	</div>
+</div>
 
 {% endblock %}
