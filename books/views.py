@@ -8,6 +8,8 @@ from django.utils.formats import get_format
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext, Context
+from django.db.models import Q
 
 
 def index(request):
@@ -58,6 +60,14 @@ def profile(request, user_id):
         raise Http404("Question does not exist")
     return render(request, 'profile.html', {'user': user, 'all_borrowings': all_borrowings})
 
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        results = Book.objects.filter(Q(name__icontains=query) | Q(description__icontains=query) | Q(author__icontains=query) | Q(publication_year__icontains=query) | Q(publisher__icontains=query) | Q(ISBN__icontains=query))
+    else:
+        results = Book.objects.all()
+    context = dict(results=results, q=query)
+    return render(request, 'books/index.html', context)
 
 @login_required
 def borrow(request, book_id, user_id):
