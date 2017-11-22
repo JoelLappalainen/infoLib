@@ -22,7 +22,13 @@
 					<tbody>
 						{% for borrowing in all_borrowings %} {% if borrowing.borrower == user %}
 						<tr>
-							<td>{{ borrowing.book.name }}</td>
+							<td>
+								{{ borrowing.book.author }}, {{ borrowing.book.publication_year }}
+								<br>
+								<a href="{% url 'books:detail' borrowing.book.id %}">
+									<h4>{{ borrowing.book.name }}</h4>
+								</a>
+							</td>
 							<td>{{ borrowing.borrowing_date }}</td>
 						</tr>
 						{% endif %} {% endfor %}
@@ -56,6 +62,10 @@
 		{% endif %}
 	</div>
 </div>
+<<<<<<< HEAD
 </div>
 
 {% endblock %}
+=======
+{% endblock %}
+>>>>>>> ebc27156f2e6e8660cea9b4fe1c418bb7113cedc
