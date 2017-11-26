@@ -42,7 +42,7 @@ def add_book(request):
         book_form = BookForm()
     return render(request, 'books/add_book.html', {'booksurl': booksurl, 'book_form': book_form})
 
-# @user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def adminpage(request):
     try:
         all_users = User.objects.all()
@@ -77,7 +77,8 @@ def search(request):
         results = Book.objects.filter(Q(name__icontains=query) | Q(description__icontains=query) | Q(author__icontains=query) | Q(publication_year__icontains=query) | Q(publisher__icontains=query) | Q(ISBN__icontains=query))
     else:
         results = Book.objects.all()
-    context = dict(results=results, q=query)
+    all_borrowings = Borrowing.objects.all()
+    context = {'results': results, 'q': query, 'all_borrowings': all_borrowings}
     return render(request, 'books/index.html', context)
 
 @login_required
