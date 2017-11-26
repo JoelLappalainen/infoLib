@@ -23,7 +23,7 @@
 
 
                 {% if all_books or results %}
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="all_books">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -38,27 +38,21 @@
                                     <tr>
                                         <td>
                                             {{ book.author }}, {{ book.publication_year }}
-                                            <br>
                                             <a href="{% url 'books:detail' book.id %}">
                                                 <h4>{{ book.name }}</h4>
                                             </a>
                                         </td>
                                         {% if book.status == 'o' %} {% if user.is_authenticated and book.borrower == user %}
                                         <td>
-                                            <a href="{% url 'books:return' book.id %}?next={{request.path}}" class="btn btn-danger btn-sm" role="button">Return</a>
-                                            <br>
-                                            <br>
+                                            <a href="{% url 'books:return' book.id %}?next={{request.path}}" class="btn btn-danger btn-sm" id="return" role="button">Return</a>
                                         </td>
                                         {% else %}
                                         <td>
-                                            <p>Borrowed by {{ book.borrower }}</p>
-                                            <br>
+                                            Borrowed by <a href="{% url 'books:profile' book.borrower.id %}"><span class="username">{{ book.borrower }}</span></a>
                                         </td>
                                         {% endif %} {% elif book.status == 'a' and user.is_authenticated %}
                                         <td>
-                                            <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" role="button">Borrow</a>
-                                            <br>
-                                            <br>
+                                            <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" id="borrow" role="button">Borrow</a>
                                         </td>
                                         {% else %}
                                         <td>Sign in!</td>
@@ -72,27 +66,21 @@
                                         <tr>
                                             <td>
                                                 {{ book.author }}, {{ book.publication_year }}
-                                                <br>
                                                 <a href="{% url 'books:detail' book.id %}">
                                                     <h4>{{ book.name }}</h4>
                                                 </a>
                                             </td>
                                             {% if book.status == 'o' %} {% if user.is_authenticated and book.borrower == user %}
                                             <td>
-                                                <a href="{% url 'books:return' book.id %}?next={{request.path}}" class="btn btn-danger btn-sm" role="button">Return</a>
-                                                <br>
-                                                <br>
+                                                <a href="{% url 'books:return' book.id %}?next={{request.path}}" class="btn btn-danger btn-sm" id="return" role="button">Return</a>
                                             </td>
                                             {% else %}
                                             <td>
-                                                <p>Borrowed by {{ book.borrower }}</p>
-                                                <br>
+                                                Borrowed by <a href="{% url 'books:profile' book.borrower.id %}"><span class="username">{{ book.borrower }}</span></a>
                                             </td>
                                             {% endif %} {% elif book.status == 'a' and user.is_authenticated %}
                                             <td>
-                                                <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" role="button">Borrow</a>
-                                                <br>
-                                                <br>
+                                                <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" id="borrow" role="button">Borrow</a>
                                             </td>
                                             {% else %}
                                             <td>Sign in!</td>
@@ -109,24 +97,24 @@
 
             </div>
             <div class="col-sm-3">
-                <h3>LATEST ACTIVITY</h3>
-                <table>
-                    <tbody id="recent_activity">
-                        <tr>
-                            <font color="#D3643B">Liisa borrowed: The Hunger Games (The Hunger Games #1)</font>
-                        </tr>
-                        <br>
-                        <br>
-                        <tr>
-                            <font color="#D3643B">Joel returned: The Bible</font>
-                        </tr>
-                        <br>
-                        <br>
-                        <tr>
-                            <font color="#D3643B">Admin added: Harry Potter and the Order of the Phoenix</font>
-                        </tr>
-                    </tbody>
-                </table>
+                <h3>LATEST BORROWINGS</h3>
+                <div class="latest">
+                    {% if all_borrowings %}
+                        {% for borrowing in all_borrowings|dictsortreversed:"borrowing_date" %}
+                            {% if forloop.counter < 11 %}
+                                <tr>
+                                    <td>
+                                        {{ borrowing.book.name }} by
+                                        <a href="{% url 'books:profile' borrowing.borrower.id %}">
+                                            <span class="username">{{ borrowing.borrower }}</span>
+                                        </a>
+                                        ({{ borrowing.borrowing_date | date:"d.m." }})<br>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

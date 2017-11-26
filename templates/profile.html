@@ -8,64 +8,38 @@
 			</div>
 		</div>
 		<div class="col-sm-8 col-md-9">
-			<h3 class="profile-title">Borrowed books:</h3>
+			<h3>Borrowed books:</h3>
+
 			{% if all_borrowings %}
 
-			<div class="table-responsive">
+			<div class="table-responsive" id="all_books">
 				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th>Name, author</th>
-							<th>Date</th>
+							<th>Borrowing date</th>
 						</tr>
 					</thead>
 					<tbody>
-						{% for borrowing in all_borrowings %} {% if borrowing.borrower == user %}
-						<tr>
-							<td>
-								{{ borrowing.book.author }}, {{ borrowing.book.publication_year }}
-								<br>
-								<a href="{% url 'books:detail' borrowing.book.id %}">
-									<h4>{{ borrowing.book.name }}</h4>
-								</a>
-							</td>
-							<td>{{ borrowing.borrowing_date }}</td>
-						</tr>
-						{% endif %} {% endfor %}
-					</tbody>
-				</table>
-			</div>
-
-			<h3 class="profile-title">Returned books:</h3>
-			{% if all_borrowings %}
-
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Name, author</th>
-							<th>Date</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for borrowing in all_borrowings %} {% if borrowing.borrower == user %}
-						<tr>
-							<td>{{ borrowing.book.name }}</td>
-							<td>{{ borrowing.borrowing_date }}</td>
-						</tr>
-						{% endif %} {% endfor %}
+						{% for borrowing in all_borrowings|dictsortreversed:"borrowing_date" %}
+							<tr>
+								<td>
+									{{ borrowing.book.author }} –
+									<a href="{% url 'books:detail' borrowing.book.id %}">
+										<span class="username"><strong>{{ borrowing.book.name }}</strong></span>
+									</a>
+								</td>
+								<td>
+									{{ borrowing.borrowing_date | date:"d.m.Y" }}
+								</td>
+							</tr>
+						{% endfor %}
 					</tbody>
 				</table>
 			</div>
 			{% endif %}
 		</div>
-		{% endif %}
 	</div>
-</div>
-<<<<<<< HEAD
 </div>
 
 {% endblock %}
-=======
-{% endblock %}
->>>>>>> ebc27156f2e6e8660cea9b4fe1c418bb7113cedc

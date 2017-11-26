@@ -7,18 +7,19 @@ from django.core.urlresolvers import reverse
 from django.utils.formats import get_format
 from datetime import datetime
 from django.utils.dateformat import DateFormat
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext, Context
 from django.db.models import Q
 
 
 def index(request):
     all_books = Book.objects.all()
-    context = {'all_books': all_books}
+    all_borrowings = Borrowing.objects.all()
+    context = {'all_books': all_books, 'all_borrowings': all_borrowings}
     return render(request, 'books/index.html', context)
 
 
-@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def add_book(request):
     booksurl = request.build_absolute_uri(reverse('books:index'))
     if request.method == 'POST':
@@ -41,21 +42,31 @@ def add_book(request):
         book_form = BookForm()
     return render(request, 'books/add_book.html', {'booksurl': booksurl, 'book_form': book_form})
 
+# @user_passes_test(lambda u: u.is_superuser)
+def adminpage(request):
+    try:
+        all_users = User.objects.all()
+        all_borrowings = Borrowing.objects.all()
+        all_reviews = Review.objects.all()
+    except Book.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'admin_page.html', {'all_users': all_users, 'all_borrowings': all_borrowings, 'all_reviews': all_reviews})
 
 def detail(request, book_id):
     try:
         book = Book.objects.get(pk=book_id)
-        all_borrowings = Borrowing.objects.all()
+        all_borrowings = Borrowing.objects.filter(book=book_id)
         all_reviews = Review.objects.all()
     except Book.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'books/detail.html', {'book': book, 'all_borrowings': all_borrowings, 'all_reviews': all_reviews})
 
-
+@login_required
 def profile(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
         all_borrowings = Borrowing.objects.all()
+        all_borrowings = Borrowing.objects.filter(borrower=user_id)
     except User.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'profile.html', {'user': user, 'all_borrowings': all_borrowings})
