@@ -145,3 +145,14 @@ def reviews(request, book_id, user_id):
     else:
         review_form = ReviewForm()
     return render(request, 'books/review_book.html', {'detailurl': detailurl, 'review': review_form})
+
+@user_passes_test(lambda u: u.is_superuser)
+def delete_book(request, book_id):
+    booksurl = request.build_absolute_uri(reverse('books:index'))
+    detailurl = request.build_absolute_uri(reverse('books:detail', args=[book_id]))
+    book = Book.objects.get(pk=book_id)
+    # if OK is pressed, delete game and redirect to /games/
+    if request.method == 'POST':
+        book.delete()
+        return HttpResponseRedirect('/')
+    return render(request, 'books/delete.html', {'booksurl': booksurl, 'detailurl': detailurl, 'book': book})

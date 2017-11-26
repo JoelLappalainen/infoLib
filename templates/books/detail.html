@@ -31,6 +31,10 @@
 				<h3>No image to display</h3>
 				{% endif %}
 				<br>
+				{% if user.is_superuser %}
+					<a href="{% url 'books:delete' book.id %}" class="btn btn-danger btn-sm" id="return" role="button">Delete</a><br><br>
+				{% endif %}
+				<br>
 				<br>
 
 

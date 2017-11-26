@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^search/', views.search, name='search'),
     url(r'^$', views.index, name='index'),
     url(r'^adminpage/', views.adminpage, name="adminpage"),
+    url(r'^delete/(?P<book_id>[0-9]+)/$', views.delete_book, name='delete'),
 
     # todo: 'user' app for these?
     url(r'^profile/(?P<user_id>[0-9]+)/$', views.profile, name="profile"),
