@@ -43,14 +43,23 @@
 
                     <li class="navbar-text">
                         <small>Signed in as
-                            <span class="username">{{ user.get_username }}</span>
+                            <a href="{% url 'books:profile' user.id %}">
+                                <span class="username">{{ user.username }}</span>
+                            </a>
                         </small>
                     </li>
-                    <li>
-                        <a href="{% url 'books:add_book' %}">
-                            Add book
-                        </a>
-                    </li>
+                    {% if user.is_superuser %}
+                        <li>
+                            <a href="{% url 'books:adminpage' %}">
+                                Admin page
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'books:add_book' %}">
+                                Add book
+                            </a>
+                        </li>
+                    {% endif %}
                     <li>
                         <a href="{% url 'books:profile' user.id %}">
                             Profile
@@ -87,5 +96,11 @@
 
     </div>
 </body>
+
+<script>
+    function myFunction() {
+        alert("I am an alert box!");
+    }
+</script>
 
 </html>

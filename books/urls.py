@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^add_book/', views.add_book, name='add_book'),
     url(r'^search/', views.search, name='search'),
     url(r'^$', views.index, name='index'),
+    url(r'^adminpage/', views.adminpage, name="adminpage"),
 
     # todo: 'user' app for these?
     url(r'^profile/(?P<user_id>[0-9]+)/$', views.profile, name="profile"),
