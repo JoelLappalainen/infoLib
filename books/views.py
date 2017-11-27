@@ -56,7 +56,7 @@ def detail(request, book_id):
     try:
         book = Book.objects.get(pk=book_id)
         all_borrowings = Borrowing.objects.filter(book=book_id)
-        all_reviews = Review.objects.filter(reviewed_book=book_id)
+        all_reviews = Review.objects.filter(reviewed_book=book)
     except Book.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'books/detail.html', {'book': book, 'all_borrowings': all_borrowings, 'all_reviews': all_reviews})

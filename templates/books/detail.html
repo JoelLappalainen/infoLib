@@ -70,10 +70,11 @@
 		</div>
 		<div class="col-sm-8 col-md-9">
 			<h3 class="h3_review">Reviews</h3>
+			{% if user.is_authenticated %}
 			<div class="row">
 				<a href="{% url 'books:reviews' book.id user.id %}" class="btn btn-success btn-sm" id="reviewbutton" role="button">Review this book</a>
 			</div>
-			{% if all_reviews and user.is_authenticated %}
+			{% if all_reviews %}
 				{% for review in all_reviews %}
 					{% if forloop.first %}
 						<div class="row">
@@ -98,11 +99,44 @@
 					{% if forloop.last %}
 						</div>
 					{% endif %}
+
 				{% endfor %}
 
 			{% else %}
+				<p>There is no reviews</p>
+			{% endif %}
+			{% else %}
+				{% if all_reviews %}
+					{% for review in all_reviews %}
+						{% if forloop.first %}
+							<div class="row">
+						{% endif %}
 
-				<p>Login to see the reviews</p>
+						<div class="col-xs-12 col-sm-6 col-lg-4" id="review">
+							{{ review.rating }}/5
+							<p>{{ review.review }}</p>
+							<a href="{% url 'books:profile' review.reviewer.id %}">
+								<p id="reviewer">
+									<small>- {{ review.reviewer }}</small>
+								</p>
+							</a>
+						</div>
+
+						{% if forloop.counter|divisibleby:3 %}
+							</div>
+							<br>
+							<div class="row">
+						{% endif %}
+
+						{% if forloop.last %}
+							</div>
+						{% endif %}
+
+					{% endfor %}
+
+				{% else %}
+					<p>There is no reviews</p>
+				{% endif %}
 
 			{% endif %}
 
