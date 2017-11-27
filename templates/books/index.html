@@ -21,7 +21,6 @@
                     </form>
                 </div>
 
-
                 {% if all_books or results %}
                     <div class="table-responsive" id="all_books">
                         <table class="table table-striped">
@@ -32,6 +31,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                <!-- book results of the search functionality -->
                                 {% if results %}
 
                                     {% for book in results %}
@@ -60,6 +61,7 @@
                                     </tr>
                                     {% endfor %}
 
+                                <!-- listing of all books -->
                                 {% elif all_books %}
 
                                     {% for book in all_books %}
@@ -83,7 +85,7 @@
                                                 <a href="{% url 'books:borrow' book.id user.id %}?next={{request.path}}" class="btn btn-success btn-sm" id="borrow" role="button">Borrow</a>
                                             </td>
                                             {% else %}
-                                            <td>Sign in!</td>
+                                            <td>Please sign in</td>
                                             {% endif %}
                                         </tr>
                                     {% endfor %}
@@ -92,10 +94,10 @@
                             </tbody>
                         </table>
                     </div>
-
                 {% endif %}
-
             </div>
+
+            <!-- sidebar of the landing page -->
             <div class="col-sm-3">
                 <h3>LATEST BORROWINGS</h3>
                 <div class="latest">

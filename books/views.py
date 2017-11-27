@@ -18,7 +18,6 @@ def index(request):
     context = {'all_books': all_books, 'all_borrowings': all_borrowings}
     return render(request, 'books/index.html', context)
 
-
 @user_passes_test(lambda u: u.is_superuser)
 def add_book(request):
     booksurl = request.build_absolute_uri(reverse('books:index'))
@@ -52,6 +51,7 @@ def adminpage(request):
         raise Http404("Question does not exist")
     return render(request, 'admin_page.html', {'all_users': all_users, 'all_borrowings': all_borrowings, 'all_reviews': all_reviews})
 
+# unique page for every book
 def detail(request, book_id):
     try:
         book = Book.objects.get(pk=book_id)
@@ -61,6 +61,7 @@ def detail(request, book_id):
         raise Http404("Question does not exist")
     return render(request, 'books/detail.html', {'book': book, 'all_borrowings': all_borrowings, 'all_reviews': all_reviews})
 
+# unique profile page for every user
 @login_required
 def profile(request, user_id):
     try:
@@ -71,6 +72,7 @@ def profile(request, user_id):
         raise Http404("Question does not exist")
     return render(request, 'profile.html', {'user': user, 'all_borrowings': all_borrowings})
 
+# search functionality
 def search(request):
     query = request.GET.get('q')
     if query:
@@ -97,7 +99,6 @@ def borrow(request, book_id, user_id):
     # return render(request, 'books/detail.html', {'detailurl': detailurl, 'book': book})
     return HttpResponseRedirect('/')
 
-
 @login_required
 def return_book(request, book_id):
     detailurl = request.build_absolute_uri(
@@ -109,7 +110,6 @@ def return_book(request, book_id):
     book.save()
     # return render(request, 'books/detail.html', {'detailurl': detailurl, 'book': book})
     return HttpResponseRedirect('/')
-
 
 def register(request):
     registered = False
@@ -126,7 +126,7 @@ def register(request):
         user_form = UserForm()
     return render(request, 'register.html', {'user_form': user_form, 'registered': registered})
 
-
+# function to get every review for a specific book
 def reviews(request, book_id, user_id):
     detailurl = request.build_absolute_uri(
         reverse('books:detail', args=[book_id]))

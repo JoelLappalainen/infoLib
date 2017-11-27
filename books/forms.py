@@ -2,7 +2,7 @@ from django import forms
 from books.models import Book, Review
 from django.contrib.auth.models import User
 
-
+# book adding
 class BookForm(forms.ModelForm):
     ISBN = forms.CharField(max_length=150)
     name = forms.CharField(max_length=150)
@@ -17,7 +17,7 @@ class BookForm(forms.ModelForm):
         model = Book
         fields = ('ISBN', 'name', 'description', 'author', 'publication_year', 'publisher', 'page_count', 'cover_URL',)
 
-
+# user registration
 class UserForm(forms.ModelForm):
     username = forms.CharField(max_length=50)
     password = forms.CharField(widget=forms.PasswordInput())
@@ -26,7 +26,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'password')
 
-
+# review adding
 class ReviewForm(forms.ModelForm):
     review = forms.CharField(max_length=1000)
     rating = forms.IntegerField(min_value=1, max_value=5)

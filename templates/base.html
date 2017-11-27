@@ -41,49 +41,54 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     {% if user.is_authenticated %}
+                    <!-- navbar that an authenticated user sees -->
 
-                    <li class="navbar-text">
-                        <small>Signed in as
+                        <li class="navbar-text">
+                            <small>Signed in as
+                                <a href="{% url 'books:profile' user.id %}">
+                                    <span class="username">{{ user.username }}</span>
+                                </a>
+                            </small>
+                        </li>
+
+                        <!-- links that only admin sees -->
+                        {% if user.is_superuser %}
+                            <li>
+                                <a href="{% url 'books:adminpage' %}">
+                                    Admin page
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'books:add_book' %}">
+                                    Add book
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        <li>
                             <a href="{% url 'books:profile' user.id %}">
-                                <span class="username">{{ user.username }}</span>
-                            </a>
-                        </small>
-                    </li>
-                    {% if user.is_superuser %}
-                        <li>
-                            <a href="{% url 'books:adminpage' %}">
-                                Admin page
+                                Profile
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'books:add_book' %}">
-                                Add book
+                            <a href="{% url 'logout'%}">
+                                Logout
                             </a>
                         </li>
-                    {% endif %}
-                    <li>
-                        <a href="{% url 'books:profile' user.id %}">
-                            Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'logout'%}">
-                            Logout
-                        </a>
-                    </li>
 
                     {% else %}
+                    <!-- navbar that a non-authenticated user sees -->
 
-                    <li>
-                        <a href="{% url 'login'%}?next={{request.path}}">
-                            Login
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'books:register' %}">
-                            Register
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{% url 'login'%}?next={{request.path}}">
+                                Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'books:register' %}">
+                                Register
+                            </a>
+                        </li>
 
                     {% endif %}
 
@@ -97,11 +102,5 @@
 
     </div>
 </body>
-
-<script>
-    function myFunction() {
-        alert("I am an alert box!");
-    }
-</script>
 
 </html>
