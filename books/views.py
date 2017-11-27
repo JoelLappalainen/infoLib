@@ -56,7 +56,7 @@ def detail(request, book_id):
     try:
         book = Book.objects.get(pk=book_id)
         all_borrowings = Borrowing.objects.filter(book=book_id)
-        all_reviews = Review.objects.all()
+        all_reviews = Review.objects.filter(reviewed_book=book_id)
     except Book.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'books/detail.html', {'book': book, 'all_borrowings': all_borrowings, 'all_reviews': all_reviews})
@@ -74,7 +74,7 @@ def profile(request, user_id):
 def search(request):
     query = request.GET.get('q')
     if query:
-        results = Book.objects.filter(Q(name__icontains=query) | Q(description__icontains=query) | Q(author__icontains=query) | Q(publication_year__icontains=query) | Q(publisher__icontains=query) | Q(ISBN__icontains=query))
+        results = Book.objects.filter(Q(name__icontains=query) | Q(author__icontains=query) | Q(publication_year__icontains=query) | Q(publisher__icontains=query) | Q(ISBN__icontains=query))
     else:
         results = Book.objects.all()
     all_borrowings = Borrowing.objects.all()
